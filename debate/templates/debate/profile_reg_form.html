@@ -1,0 +1,15 @@
+{% extends 'debate/base.html' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>Register</h1>
+            <h5>Tell us more!</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                 <button type="submit" class="btn btn-success">Let's Start Debating!</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

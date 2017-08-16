@@ -1,0 +1,18 @@
+{% extends 'debate/base.html' %}
+
+{% block title %}Edit User Profile{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h1>Edit Profile</h1></div>
+            <div class="panel-body">
+               <form method="post">
+                   {% csrf_token %}
+                   {{ form.as_p }}
+                   <button type="submit">Submit</button>
+               </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

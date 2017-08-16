@@ -1,0 +1,79 @@
+{% extends 'debate/base.html' %}
+
+{% block title %}<title>User Profile</title>{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h1>{{ user.first_name }}'s Topics</h1>
+                    </div>
+                    <div class="panel-body">
+                       {% for top in user.userprofile.favorite_topics %}
+                           <p>{{ top }}</p>
+                       {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+{#                <div class="panel panel-danger">#}
+                    <div class="jumbotron" id="profile-head">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="thumbnail"><img class="media-object" src="{{ user.userprofile.image.url }}"></div>
+                                <a href="/debate/profile/edit" class="btn btn-primary" role="button">Edit Profile</a>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h2 class="color-head" id="prof-name">{{ user.first_name }} {{ user.last_name }}</h2>
+                                <p id="prof_det">Username: {{ user }}</p>
+                                <p id="prof_det">Name: {{ user.first_name }} {{ user.last_name }}</p>
+                                <p id="prof_det">Email: {{ user.email }}</p>
+                                <p id="prof_det">Hometown: {{ user.userprofile.city }}</p>
+                            </div>
+                        </div>
+                    </div>
+{#                </div>#}
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h1>{{ user.first_name }}'s Friends</h1>
+                        <a href="/debate/find_friends/" class="btn btn-success" role="button">Find Friends</a>
+                    </div>
+                    <div class="panel-body">
+                        {% for user in friends %}
+                            <a href="{% url 'debate:profile_with_pk' pk=user.pk %}"><h4>{{ user.first_name }} {{ user.last_name }}</h4></a>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h1>{{ user.first_name }}'s Posts</h1></div>
+                    <div class="panel-body">
+                        {% for user_debate in user_debates %}
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="media-object" src="{{ user.userprofile.image.url }}">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ user_debate.topic }}</h4>
+                                    <p class="media-heading">{{ user_debate.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

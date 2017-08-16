@@ -1,0 +1,57 @@
+body{
+    background-color: white;
+    background-image: url("../images/tile-texture.png");
+}
+
+#alertNoTopics{
+    font-size: large;
+}
+
+.input-group-btn{
+    color:red;
+}
+
+#navi {
+    color: green;
+}
+.color-me {
+    color: white;
+}
+
+#profile-head{
+    background-color: #800080;
+    color: white;
+    border: dashed ;
+    border-color: red;
+    border-width: 10px;
+    text-align: center;
+}
+
+.thumbnail{
+    width: 150px;
+}
+
+.media-object{
+    height: 75px;
+}
+
+#prof_det{
+    font-size: large;
+    text-align: center;
+}
+
+.navbar{
+    border-radius: 0;
+
+}
+
+.navbar-brand{
+    font-family: 'Syncopate', cursive;
+    color : white;
+}
+
+#navbarAll{
+    background-color: purple;
+
+
+}

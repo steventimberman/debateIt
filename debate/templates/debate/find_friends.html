@@ -1,0 +1,24 @@
+{% extends 'debate/base.html' %}
+
+{% block body %}
+
+    {% if object_list %}
+
+            {% for person in object_list %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <p><a href = "/debate/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a></p>
+                                <a href="/connect/add/{{ person.id }}/" class="btn btn-success" role="button">Add Friend</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+    {% else %}
+        <div class="alert alert-danger" id="alertNoTopics">There are no friends to find!</div>
+    {% endif %}
+
+{% endblock %}

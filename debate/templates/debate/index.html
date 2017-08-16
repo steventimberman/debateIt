@@ -1,0 +1,38 @@
+{% extends 'debate/base.html' %}
+
+{% block body %}
+
+    {% if object_list %}
+
+            {% for topic in object_list %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="/debate/profile/{{ topic.user.id }}"><img class="media-object" src="{{ topic.user.userprofile.image.url }}"></a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h4>{{ topic.topic }}</h4>
+                                                <a href="{{ topic.id }}/" class="btn btn-default" role="button">Go To Debate</a></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>{{ topic.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+    {% else %}
+        <div class="alert alert-danger" id="alertNoTopics">There are no topics to debate.</div>
+    {% endif %}
+
+{% endblock %}
