@@ -156,11 +156,3 @@ def change_friends(request, operation, pk):
 
 
 
-
-
-
-
-
-
-
-
