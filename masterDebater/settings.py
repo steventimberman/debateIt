@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debate.apps.DebateConfig',
     'multiselectfield',
-    'disqus',
+
 ]
 
 MIDDLEWARE = [
