@@ -51,10 +51,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'masterDebater.middleware.LoginRequiredMiddleware'
+    'debateIt.middleware.LoginRequiredMiddleware'
 ]
 
-ROOT_URLCONF = 'masterDebater.urls'
+ROOT_URLCONF = 'debateIt.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'masterDebater.wsgi.application'
+WSGI_APPLICATION = 'debateIt.wsgi.application'
 
 
 # Database

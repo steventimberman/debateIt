@@ -23,9 +23,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 {% if user.is_authenticated %}
-                <a class="navbar-brand" href="{%  url 'debate:index' %}">Debate It</a>
+                    <a class="navbar-brand" href="{%  url 'debate:index' %}">
+                        <a href="{%  url 'debate:login' %}">
+                            <img class="deb-im" src="{% static 'debate/images/debate_it_words_white.png' %}" height="60px"/>
+                        </a>
+                    </a>
                 {% else %}
-                <a class="navbar-brand" href="{%  url 'debate:login' %}">Debate It</a>
+                <a href="{%  url 'debate:login' %}"><img class="deb-im" src="{% static 'debate/images/debate_it_words_white.png' %}" height="50px"/></a>
                 {% endif %}
             </div>
 

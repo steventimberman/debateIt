@@ -3,6 +3,10 @@ body{
     background-image: url("../images/tile-texture.png");
 }
 
+.deb-im {
+    size: 20px;
+}
+
 #alertNoTopics{
     font-size: large;
 }
@@ -15,12 +19,12 @@ body{
     color: green;
 }
 .color-me {
-    color: white;
+    color: orange;
 }
 
 #profile-head{
-    background-color: #800080;
-    color: white;
+    background-color: #650d88;
+    color: #e78200;
     border: dashed ;
     border-color: red;
     border-width: 10px;
@@ -51,7 +55,7 @@ body{
 }
 
 #navbarAll{
-    background-color: purple;
+    background-color: #650d88;
 
 
 }
