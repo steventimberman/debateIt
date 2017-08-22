@@ -85,7 +85,44 @@ class DebateTopic(models.Model):
     topic = models.CharField(max_length=250)
     description = models.CharField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
+    cover_photo = models.ImageField(blank=True)
+    article_URL = models.URLField(blank=True)
     user = models.ForeignKey(User)
+
+
+    TOPIC_CHOICES = (('Sports', 'Sports'),
+                     ('Politics', 'Politics'),
+                     ('Entertainment', 'Entertainment'),
+                     ('Fashion', 'Fashion'),
+                     ('Odd News', 'Odd News'),
+                     ('Local', 'Local'),
+                     ('International', 'International'),
+                     ('Music', 'Music'),
+                     ('Trending', 'Trending'),
+                     ('Technology', 'Technology'),
+                     ('Science', 'Science'),
+                     ('Business', 'Business'),
+                     ('Finance', 'Finance'),
+                     ('Television', 'Television'),
+                     ('Movies', 'Movies'),
+                     ('Celebrities', 'Celebrities'),
+                     ('Social Media', 'Social Media'),
+                     ('Food', 'Food'),
+                     ('Health', 'Health'),
+                     ('Nature', 'Nature'),
+                     ('Kids', 'Kids'),
+                     ('Breaking News', 'Breaking News'),
+                     ('Travel', 'Travel'),
+                     ('Substances', 'Substances'),
+                     ('United States', 'United States'),
+                     ('Andimals', 'Animals'),
+                     ('Art', 'Art'),
+                     ('Education', 'Education'),
+                     ('Employment', 'Employment'),
+                     ('Brands', 'Brands')
+                     )
+    topic_tags = MultiSelectField(choices=TOPIC_CHOICES, default=(('Odd News', 'Odd News')))
+
 
     def get_absolute_url(self):
         return reverse('debate:detail', kwargs={'pk': self.pk})

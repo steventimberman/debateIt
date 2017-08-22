@@ -34,7 +34,7 @@ class DetailView(generic.DetailView):
 #DebateTopic view classes
 class DebateTopicCreate(CreateView):
     model = DebateTopic
-    fields = ['topic', 'description']
+    fields = ['topic', 'description', 'article_URL', 'cover_photo', 'topic_tags']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -98,17 +98,7 @@ class RegisterUserProfile(View):
         return render(request, self.template_name, {'form': form})
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = RegistrationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/debate')
-#     else:
-#         form = RegistrationForm()
-#
-#         args = {'form': form}
-#         return render(request, 'debate/reg_form.html', args)
+
 
 #debate view func
 class ProfileView(generic.TemplateView):
