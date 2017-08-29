@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
-from .models import DebateTopic, Friend
+from .models import DebateTopic, Friend, Point
 from django.template import loader
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
-from .forms import RegistrationForm, EditProfileForm, UserProfileRegForm
+from .forms import RegistrationForm, EditProfileForm, UserProfileRegForm, CommentForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserChangeForm
@@ -34,7 +34,7 @@ class DetailView(generic.DetailView):
 #DebateTopic view classes
 class DebateTopicCreate(CreateView):
     model = DebateTopic
-    fields = ['topic', 'description', 'article_URL', 'cover_photo', 'topic_tags']
+    fields = ['topic', 'description', 'article_URL', 'photo', 'tags']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -115,6 +115,22 @@ class ProfileView(generic.TemplateView):
         friends = friend.users.all().order_by('first_name', 'last_name')
         args = {'user' : user, 'friends': friends, 'user_debates': user_debates}
         return render(request, self.template_name, args)
+
+
+def add_comment_to_post(request, pk):
+    debate = get_object_or_404(DebateTopic, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.debate = debate
+            comment.author = request.user
+            comment.save()
+            return redirect('debate:detail', pk=debate.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'debate/create_comment.html', {'form': form})
+
 
 
 def profile_edit(request):

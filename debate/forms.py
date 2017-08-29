@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Point
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from multiselectfield import MultiSelectField
 
@@ -58,3 +58,9 @@ class EditProfileForm(UserChangeForm):
             'last_name',
             'password'
         )
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Point
+        fields = ('claim',)

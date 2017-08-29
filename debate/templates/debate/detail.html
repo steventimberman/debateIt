@@ -4,7 +4,48 @@
 
 {% block body %}
     <div class="container-fluid">
-        <h1>{{ debatetopic.topic }}</h1>
-        <h3>{{ debatetopic.description }}</h3>
+        <div class="panel">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="#det-debate-topic" data-toggle="tab" class="active">Debate Info</a>
+                </li>
+                <li>
+                    <a href="#det-comments" data-toggle="tab">Comments</a>
+                </li>
+                <li>
+                    <a href="#det-articles" data-toggle="tab">Articles</a>
+                </li>
+            </ul>
+
+            <ul class="tab-content">
+                <li id="det-debate-topic" class="tab-pane active" >
+                    <h1>Debate: {{ debatetopic.topic }}</h1>
+                    <h3>Description: {{ debatetopic.description }}</h3>
+                    <ul><h4>Topic Tags:</h4>
+                        {% for tag in debatetopic.tags %}
+                            <li>
+                                <p>{{ tag }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li id="det-comments" class="tab-pane">
+                    <h1>Comments</h1>
+                    <a href="{% url 'debate:comment-add' pk=debatetopic.pk%}"> Add comment</a>
+                    {% for comment in debatetopic.points.all %}
+                        <div class="comment">
+                            <div class="date">{{ comment.created_date }}</div>
+                            <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
+                            <p>{{ comment.claim|linebreaks }}</p>
+                        </div>
+                    {% empty %}
+                        <p>Be the first to spark this debate!</p>
+                    {% endfor %}
+                </li>
+                <li id="det-articles" class="tab-pane">
+                    <h1>Articles</h1>
+                </li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from multiselectfield import MultiSelectField
+from django.utils import timezone
 
 #USER
 class UserProfile(models.Model):
@@ -85,8 +86,8 @@ class DebateTopic(models.Model):
     topic = models.CharField(max_length=250)
     description = models.CharField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
-    cover_photo = models.ImageField(blank=True)
-    article_URL = models.URLField(blank=True)
+    photo = models.ImageField(blank=True)
+    article_URL = models.URLField(blank=True, null=True)
     user = models.ForeignKey(User)
 
 
@@ -121,7 +122,7 @@ class DebateTopic(models.Model):
                      ('Employment', 'Employment'),
                      ('Brands', 'Brands')
                      )
-    topic_tags = MultiSelectField(choices=TOPIC_CHOICES, default=(('Odd News', 'Odd News')))
+    tags = MultiSelectField(choices=TOPIC_CHOICES, default=(('Odd News', 'Odd News')))
 
 
     def get_absolute_url(self):
@@ -139,11 +140,15 @@ class DebateSide(models.Model):
         return self.side
 
 
+#a point is a claim, or comment, on the debate. It's how other contribute.
 class Point(models.Model):
-    debate_side = models.ForeignKey(DebateSide, on_delete=models.CASCADE)
+    debate = models.ForeignKey(DebateTopic, on_delete=models.CASCADE, related_name='points', null=True)
+    # debate_side = models.ForeignKey(DebateSide)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    created_date = models.DateTimeField(default=timezone.now)
     claim = models.CharField(max_length=500)
-    good_point = models.BigIntegerField()
-    bad_point = models.BigIntegerField()
+    good_points = models.BigIntegerField(default=0)  #likes
+    bad_points = models.BigIntegerField(default=0)   #dislikes
 
     def __str__(self):
         return self.claim

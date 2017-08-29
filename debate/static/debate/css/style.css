@@ -1,6 +1,6 @@
 body{
     background-color: white;
-    background-image: url("../images/tile-texture.png");
+    background-image: url("../images/sound2.png");
 }
 
 .deb-im {
@@ -26,7 +26,7 @@ body{
     background-color: #650d88;
     color: #e78200;
     border: dashed ;
-    border-color: red;
+    border-color: orangered;
     border-width: 10px;
     text-align: center;
 }

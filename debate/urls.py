@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^debate-topic/add/$', views.DebateTopicCreate.as_view(),name='debate-topic-add'),
     url(r'^debate-topic/(?P<pk>[0-9]+)/$', views.DebateTopicCreate.as_view(),name='debate-topic-update'),
     url(r'^debate-topic/(?P<pk>[0-9]+)/delete/$', views.DebateTopicCreate.as_view(),name='debate-topic-delete'),
+
+    url(r'^(?P<pk>[0-9]+)/comment-add/$', views.add_comment_to_post, name='comment-add'),
 ]
