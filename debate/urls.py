@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 from . import views
 from django.contrib.auth.views import login, logout
 
@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^debate-topic/(?P<pk>[0-9]+)/delete/$', views.DebateTopicCreate.as_view(),name='debate-topic-delete'),
 
     url(r'^(?P<pk>[0-9]+)/comment-add/$', views.add_comment_to_post, name='comment-add'),
+
+    url(r'^search/', views.search_titles),
 ]

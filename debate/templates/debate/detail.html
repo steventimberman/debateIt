@@ -31,13 +31,33 @@
                 </li>
                 <li id="det-comments" class="tab-pane">
                     <h1>Comments</h1>
-                    <a href="{% url 'debate:comment-add' pk=debatetopic.pk%}"> Add comment</a>
-                    {% for comment in debatetopic.points.all %}
-                        <div class="comment">
-                            <div class="date">{{ comment.created_date }}</div>
-                            <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
-                            <p>{{ comment.claim|linebreaks }}</p>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{% url 'debate:comment-add' pk=debatetopic.pk%}"> Add comment</a>
+                            </div>
                         </div>
+                        {% for comment in debatetopic.points.all %}
+                        <div class="row">
+                        <div class="col-sm-1">
+                        <div class="thumbnail">
+                        <img class="img-responsive user-photo" src="{{ comment.author.userprofile.image.url }}">
+                        </div><!-- /thumbnail -->
+                        </div><!-- /col-sm-1 -->
+
+                        <div class="col-sm-5">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong> <span class="text-muted">commented on {{ comment.created_date }}</span>
+                        </div>
+                        <div class="panel-body">
+                        {{ comment.claim|linebreaks }}
+                        </div><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+                        </div>
+                    </div>
                     {% empty %}
                         <p>Be the first to spark this debate!</p>
                     {% endfor %}

@@ -1,0 +1,11 @@
+{% if debate_names.count > 0 %}
+
+{% for debate in debate_names %}
+    <li><a href="{{ debate.object.get_absolute_url }}">{{ debate.object.topic }}</a></li>
+{% endfor %}
+
+{% else %}
+
+<li>No debates with this name found!</li>
+
+{% endif %}

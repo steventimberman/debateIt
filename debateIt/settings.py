@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debate.apps.DebateConfig',
     'multiselectfield',
+    'whoosh',
+    'haystack',
 
 ]
 
@@ -136,3 +138,11 @@ LOGIN_EXEMPT_URLS = (
     r'^debate/register/$'
 )
 
+WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh/')
+
+HAYSTACK_CONNECTIONS = {
+    'default' : {
+        'ENGINE' : 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH' : WHOOSH_INDEX,
+    },
+}

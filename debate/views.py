@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponse, Http404
 from .models import DebateTopic, Friend, Point
 from django.template import loader
@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserChangeForm
 from django.urls import reverse
+from haystack.query import SearchQuerySet
 
 #Generic view classes
 class IndexView(generic.ListView):
@@ -153,6 +154,11 @@ def change_friends(request, operation, pk):
     elif operation == 'remove':
         Friend.remove_friend(request.user, new_friend)
     return redirect('debate:profile')
+
+def search_titles(request):
+    debate_names = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
+
+    return render_to_response('debate/ajax_search.html', {'debate_names' : debate_names})
 
 
 

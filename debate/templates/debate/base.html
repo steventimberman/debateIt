@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Syncopate" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script  src="{% static 'debate/js/jquery-3.2.1.js' %}"></script>
+    <script  src="{% static 'debate/js/ajax.js' %}"></script>
     <link rel="stylesheet"  href="{% static 'debate/css/style.css' %}"/>
 </head>
 <body>
@@ -41,16 +43,20 @@
 
                 {% if user.is_authenticated %}
 
-                <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="navbar-form navbar-left" role="search" method="get" action="#">
                     <div class="form-group">
                         <div class="input-group pull-right">
-                            <input type="text" class="form-control" name="q" value="">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="search" name="search" value=""/>
+                            <ul id="search-results">
+
+                            </ul>
                             <div class="input-group-btn">
                                 <button type="submit" class="btn"><div class="glyphicon glyphicon-search"></div> </button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
 
                 <ul class="nav navbar-nav navbar-right" id="navi">
 
