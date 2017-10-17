@@ -1,0 +1,9 @@
+Django==1.11.5
+django-avatar
+django-awesome-avatar
+django-disqus
+django-fluent-comments
+django-friendship
+django-haystack
+django-multiselectfield
+whoosh
