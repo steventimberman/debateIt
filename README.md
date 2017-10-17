@@ -1,3 +1,4 @@
+
 Social networking appilication for debating
 
 Packages :
@@ -31,3 +32,4 @@ requests==2.18.4
 six==1.11.0
 urllib3==1.22
 Whoosh==2.7.4
+
