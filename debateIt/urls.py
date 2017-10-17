@@ -9,4 +9,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'debate/', include('debate.urls')),
+    url(r'^avatar/', include('avatar.urls')),
+    url(r'^blog/comments/', include('fluent_comments.urls')),
+    url(r'^comments/', include('django_comments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

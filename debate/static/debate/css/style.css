@@ -1,6 +1,6 @@
 body{
     background-color: white;
-    background-image: url("../images/sound2.png");
+    /*background-image: url("../images/sound2.png");*/
 }
 
 .deb-im {
@@ -22,18 +22,38 @@ body{
     color: orange;
 }
 
-#profile-head{
-    background-color: #650d88;
-    color: #e78200;
-    border: dashed ;
-    border-color: orangered;
-    border-width: 10px;
+#index-post{
+    background-color: darkgray;
+    color: darkmagenta;
+    border: inset;
+    border-color: darkmagenta;
+    border-width: 2px;
     text-align: center;
 }
 
-.thumbnail{
-    width: 150px;
+#profile-head{
+    background-color: darkgray;
+    color: darkmagenta;
+    text-align: center;
+    border: inset;
+    border-color: darkmagenta;
+    border-width: 2px;
 }
+
+#profile-panel-heading{
+    background: darkgray;
+}
+.panel{
+    border: inset;
+    border-color: darkmagenta;
+    border-width: 2px;
+}
+
+#comment-img{
+   width : 60px;
+}
+
+
 
 .media-object{
     height: 75px;
@@ -56,12 +76,19 @@ body{
 
 #navbarAll{
     background-color: #650d88;
-
-
 }
 
-.thumbnail {
-    padding:0px;
+#login-logo{
+    width : 200px;
+    position: relative;
+    margin-left: 100px;
+    margin-top: 60px;
+}
+
+#profile-img {
+    padding: 0px;
+    width: 155px;
+    height: 250px;
 }
 .panel {
 	position:relative;

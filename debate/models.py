@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from multiselectfield import MultiSelectField
 from django.utils import timezone
+from awesome_avatar.fields import AvatarField
 
 #USER
 class UserProfile(models.Model):
@@ -14,6 +15,7 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=40, null=True)
     email = models.EmailField(max_length=60, null=True)
     image = models.ImageField(upload_to='profile_image', blank=True)
+    # image = AvatarField(upload_to='avatars', width=100, height=100, blank=True)
     TOPIC_CHOICES = (('Sports', 'Sports'),
                      ('Politics', 'Politics'),
                      ('Entertainment', 'Entertainment'),
@@ -82,9 +84,15 @@ class Friend(models.Model):
 
 #DEBATE CLASSES
 
+class Community(models.Model):
+    name = models.CharField(max_length=150)
+    description = description = models.CharField(max_length=350)
+    photo = models.ImageField(blank=True)
+    host = models.ForeignKey(User)
+
 class DebateTopic(models.Model):
-    topic = models.CharField(max_length=250)
-    description = models.CharField(max_length=500)
+    topic = models.CharField(max_length=150)
+    description = models.CharField(max_length=350)
     timestamp = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(blank=True)
     article_URL = models.URLField(blank=True, null=True)

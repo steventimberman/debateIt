@@ -7,8 +7,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
+                <div class="panel ">
+                    <div class="panel-heading" id="profile-panel-heading">
                         <h1>{{ user.first_name }}'s Topics</h1>
                     </div>
                     <div class="panel-body">
@@ -25,9 +25,9 @@
 
                             <div class="col-md-4">
                                 {% if user.userprofile.image %}
-                                    <div class="thumbnail"><img class="media-object" src="{{ user.userprofile.image.url }}"></div>
+                                    <div ><img id="profile-img" class="media-object img-circle" src="{{ user.userprofile.image.url }}"></div>
                                 {% else %}
-                                    <div class="thumbnail"><img class="media-object" src="{% static 'debate/images/debate_it_person.png' %}"></div>
+                                    <div class="thumbnail" id="profile-img"><img class="media-object" src="{% static 'debate/images/debate_it_person.png' %}"></div>
                                 {% endif %}
                                 <a href="/debate/profile/edit" class="btn btn-primary" role="button">Edit Profile</a>
                             </div>
@@ -44,14 +44,14 @@
 {#                </div>#}
             </div>
             <div class="col-md-3">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
+                <div class="panel">
+                    <div class="panel-heading" id="profile-panel-heading">
                         <h1>{{ user.first_name }}'s Friends</h1>
                         <a href="/debate/find_friends/" class="btn btn-success" role="button">Find Friends</a>
                     </div>
                     <div class="panel-body">
-                        {% for user in friends %}
-                            <a href="{% url 'debate:profile_with_pk' pk=user.pk %}"><h4>{{ user.first_name }} {{ user.last_name }}</h4></a>
+                        {% for friend in get_friends %}
+                            <a href="{% url 'debate:profile_with_pk' pk=friend.pk %}"><h4>{{ friend.first_name }} {{ friend.last_name }}</h4></a>
 
                         {% endfor %}
                     </div>
@@ -60,16 +60,16 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-danger">
-                    <div class="panel-heading"><h1>{{ user.first_name }}'s Posts</h1></div>
+                <div class="panel">
+                    <div class="panel-heading" id="profile-panel-heading"><h1>{{ user.first_name }}'s Posts</h1></div>
                     <div class="panel-body">
                         {% for user_debate in user_debates %}
                             <div class="media">
                                 <div class="media-left">
-                                    <img class="media-object" src="{{ user.userprofile.image.url }}">
+                                    <a href="/debate/profile/{{ user.id }}"><img class="media-object" src="{{ user.userprofile.image.url }}"></a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading">{{ user_debate.topic }}</h4>
+                                    <a href="/debate/{{ user_debate.id }}"><h4 class="media-heading">{{ user_debate.topic }}</h4></a>
                                     <p class="media-heading">{{ user_debate.description }}</p>
                                 </div>
                             </div>

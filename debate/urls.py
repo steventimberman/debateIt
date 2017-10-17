@@ -25,4 +25,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/comment-add/$', views.add_comment_to_post, name='comment-add'),
 
     url(r'^search/', views.search_titles),
+
+    url(r'^api/', include('debate.api.urls', namespace='debate-api')),
+    url(r'^friendship/', include('friendship.urls')),
 ]

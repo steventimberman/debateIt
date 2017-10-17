@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile, Point
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from multiselectfield import MultiSelectField
+from fluent_comments.forms import CompactLabelsCommentForm
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -59,8 +60,22 @@ class EditProfileForm(UserChangeForm):
             'password'
         )
 
+
+
 class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Point
         fields = ('claim',)
+
+
+class CommentForm(CompactLabelsCommentForm):
+    """
+    The comment form to use
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['url'].label = "Website"  # Changed the label
+        self.fields['name'] = User
+

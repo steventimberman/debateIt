@@ -14,6 +14,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserChangeForm
 from django.urls import reverse
 from haystack.query import SearchQuerySet
+from django.contrib.auth.models import User
+from friendship.models import Friend, Follow
 
 #Generic view classes
 class IndexView(generic.ListView):
@@ -112,9 +114,10 @@ class ProfileView(generic.TemplateView):
         else:
             user = request.user
         user_debates = user.debatetopic_set.all()
-        friend = Friend.objects.get(current_user=request.user)
-        friends = friend.users.all().order_by('first_name', 'last_name')
-        args = {'user' : user, 'friends': friends, 'user_debates': user_debates}
+        # friend = Friend.objects.get(current_user=request.user)
+        # friends = friend.users.all().order_by('first_name', 'last_name')
+        get_friends = Friend.objects.friends(request.user)
+        args = {'user' : user,  'user_debates': user_debates, "get_friends" : get_friends}
         return render(request, self.template_name, args)
 
 
@@ -130,7 +133,7 @@ def add_comment_to_post(request, pk):
             return redirect('debate:detail', pk=debate.pk)
     else:
         form = CommentForm()
-    return render(request, 'debate/create_comment.html', {'form': form})
+    return render_to_response('debate/create_comment.html', {'form': form}, request)
 
 
 
@@ -159,7 +162,6 @@ def search_titles(request):
     debate_names = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
 
     return render_to_response('debate/ajax_search.html', {'debate_names' : debate_names})
-
 
 
 

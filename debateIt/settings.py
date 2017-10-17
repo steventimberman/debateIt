@@ -42,6 +42,16 @@ INSTALLED_APPS = [
     'multiselectfield',
     'whoosh',
     'haystack',
+    'avatar',
+    'awesome_avatar',
+    'rest_framework',
+    'disqus',
+    'django.contrib.sites',
+    'fluent_comments',
+    'crispy_forms',
+    'django_comments',
+    'friendship'
+
 
 ]
 
@@ -146,3 +156,14 @@ HAYSTACK_CONNECTIONS = {
         'PATH' : WHOOSH_INDEX,
     },
 }
+
+DISQUS_API_KEY = 'FKub6j3lp8B5inu8LrM6QMlflinUauiWyx8K2yPtWBH1ScYnCQ9PWeCkKnPWur3B'
+DISQUS_WEBSITE_SHORTNAME = 'debateit-1'
+
+SITE_ID = 1
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+COMMENTS_APP = 'fluent_comments'
+
+FLUENT_COMMENTS_EXCLUDE_FIELDS = ('name', 'email', 'url')

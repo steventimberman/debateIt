@@ -7,7 +7,7 @@
         <div class="panel">
             <ul class="nav nav-tabs">
                 <li>
-                    <a href="#det-debate-topic" data-toggle="tab" class="active">Debate Info</a>
+                    <a href="#det-debate-topic" data-toggle="tab" class="'">Debate Info</a>
                 </li>
                 <li>
                     <a href="#det-comments" data-toggle="tab">Comments</a>
@@ -29,38 +29,66 @@
                         {% endfor %}
                     </ul>
                 </li>
+
                 <li id="det-comments" class="tab-pane">
-                    <h1>Comments</h1>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a href="{% url 'debate:comment-add' pk=debatetopic.pk%}"> Add comment</a>
+                    <div class="row">
+                        <div class="col-md-8 ">
+                            <div class="container-fluid">
+                                {% load comments static %}
+                                <link rel="stylesheet" type="text/css" href="{% static 'fluent_comments/css/ajaxcomments.css' %}" />
+                                <script type="text/javascript" src="{% static 'fluent_comments/js/ajaxcomments.js' %}"></script>
+                                {% render_comment_form for debate.debatetopic debatetopic.id %}
+                                {% render_comment_list for debate.debatetopic debatetopic.id %}
                             </div>
-                        </div>
-                        {% for comment in debatetopic.points.all %}
-                        <div class="row">
-                        <div class="col-sm-1">
-                        <div class="thumbnail">
-                        <img class="img-responsive user-photo" src="{{ comment.author.userprofile.image.url }}">
-                        </div><!-- /thumbnail -->
-                        </div><!-- /col-sm-1 -->
 
-                        <div class="col-sm-5">
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                        <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong> <span class="text-muted">commented on {{ comment.created_date }}</span>
-                        </div>
-                        <div class="panel-body">
-                        {{ comment.claim|linebreaks }}
-                        </div><!-- /panel-body -->
-                        </div><!-- /panel panel-default -->
-                        </div><!-- /col-sm-5 -->
+{#                            <a href="{% url 'debate:comment-add' pk=debatetopic.pk%}"> Add comment</a>#}
+{##}
+{#                            <form method="post" enctype="multipart/form-data" id="myForm">#}
+{#                                {% csrf_token %}#}
+{#                                <div class="form-group">#}
+{#                                    <label>Share your voice!</label>#}
+{#                                    <input type="text" class="form-control" id="comment-input" placeholder="Comment">#}
+{#                                    <button class="btn btn-primary" type="submit">Post</button>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                            <script>#}
+{#                                // wait for the DOM to be loaded#}
+{#                                $(document).ready(function() {#}
+{#                                    // bind 'myForm' and provide a simple callback function#}
+{#                                    $('#myForm').ajaxForm(function() {#}
+{#                                        alert("Thank you for your comment!");#}
+{#                                    });#}
+{#                                });#}
+{#                            </script>#}
                         </div>
                     </div>
-                    {% empty %}
-                        <p>Be the first to spark this debate!</p>
-                    {% endfor %}
+
+{#                    {% for comment in debatetopic.points.all %}#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-1 ">#}
+{#                            <div>#}
+{#                                <img id="comment-img" class="img-responsive img-circle" src="{{ comment.author.userprofile.image.url }}">#}
+{#                            </div><!-- /thumbnail -->#}
+{#                        </div><!-- /col-sm-1 -->#}
+{##}
+{#                        <div class="col-md-6">#}
+{#                            <div class="panel panel-default">#}
+{#                                <div class="panel-heading">#}
+{#                                    <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>#}
+{#                                    <span class="text-muted">commented on {{ comment.created_date }}</span>#}
+{#                                    <button class="btn btn-primary">Good Point! <span class="badge">{{ comment.good_points }}</span></button>#}
+{#                                    <button class="btn btn-danger" type="button">Unclear <span class="badge">{{ comment.bad_points }}</span></button>#}
+{#                                </div>#}
+{#                                <div class="panel-body">#}
+{#                                    {{ comment.claim|linebreaks }}#}
+{#                                </div><!-- /panel-body -->#}
+{#                            </div><!-- /panel panel-default -->#}
+{#                        </div><!-- /col-sm-5 -->#}
+{#                    </div>#}
+{##}
+{#                    {% empty %}#}
+{#                        <p>Be the first to spark this debate!</p>#}
+{#                    {% endfor %}#}
                 </li>
                 <li id="det-articles" class="tab-pane">
                     <h1>Articles</h1>
